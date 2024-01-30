@@ -38,6 +38,8 @@ export default function SignUp() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
+      password: "",
+      role: "",
     },
   });
 
@@ -96,20 +98,20 @@ export default function SignUp() {
               />
               <FormField
                 control={form.control}
-                name="password"
+                name="role"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Individual Type</FormLabel>
                     <FormControl>
-                      <Select>
+                      <Select onValueChange={(value) => field.onChange(value)}>
                         <SelectTrigger className="w-full">
-                          <SelectValue placeholder="Select" />
+                          <SelectValue placeholder="Select" {...field} />
                         </SelectTrigger>
                         <SelectContent>
                           <SelectGroup>
-                            <SelectItem value="apple">Farmer</SelectItem>
-                            <SelectItem value="banana">Supplier</SelectItem>
-                            <SelectItem value="blueberry">
+                            <SelectItem value="farmer">Farmer</SelectItem>
+                            <SelectItem value="supplier">Supplier</SelectItem>
+                            <SelectItem value="distributor">
                               Distributor
                             </SelectItem>
                           </SelectGroup>
@@ -125,12 +127,9 @@ export default function SignUp() {
           </form>
         </Form>
         <p className="mb-auto mt-4 text-center">
-          Don&apos;t have an account?{" "}
-          <Link
-            className="text-[#62a3ae] hover:text-green-600"
-            href="/signup"
-          >
-            Sign up
+          ALready have an account?{" "}
+          <Link className="text-[#62a3ae] hover:text-green-600" href="/">
+            LogIn
           </Link>
         </p>
       </div>

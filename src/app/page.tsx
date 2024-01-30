@@ -62,7 +62,7 @@ export default function HomePage() {
         <p className="mb-auto mt-4 text-center">
           Don&apos;t have an account?{" "}
           <Link
-            className="text-[#62a3ae] hover:text-green-600 underline"
+            className="text-[#62a3ae] hover:text-green-600"
             href="/signup"
           >
             Sign up
