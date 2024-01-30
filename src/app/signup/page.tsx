@@ -123,7 +123,9 @@ export default function SignUp() {
                 )}
               />
             </div>
-            <Button type="submit">Submit</Button>
+            <Button type="submit" className="hover:bg-[#4a7b84] bg-[#62a3ae]">
+              Submit
+            </Button>
           </form>
         </Form>
         <p className="mb-auto mt-4 text-center">

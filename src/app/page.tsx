@@ -52,7 +52,7 @@ export default function HomePage() {
           </div>
           <div className="mt-6">
             <Button
-              className="w-full py-2 px-4 text-center bg-[#62a3ae] rounded-md text-white text-sm hover:bg-green-600"
+              className="w-full py-2 px-4 text-center bg-[#62a3ae] rounded-md text-white text-sm hover:bg-[#4a7b84]"
               type="submit"
             >
               Login
