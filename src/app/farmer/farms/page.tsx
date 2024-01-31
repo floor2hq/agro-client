@@ -3,7 +3,7 @@ import FarmCard from "@/components/component/farmer/FarmCard";
 import FarmerHeader from "@/components/component/farmer/FarmerHeader";
 
 function FarmsPage() {
-  const farmIds = ["1", "2", "3", "4", "5", "6", "7", "8"];
+  const farmIds = ["1", "2", "3"];
   return (
     <>
       <FarmerHeader />

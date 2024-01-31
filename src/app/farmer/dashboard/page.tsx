@@ -1,8 +1,8 @@
 "use client";
 import FarmerHeader from "@/components/component/farmer/FarmerHeader";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ResponsiveBar } from "@nivo/bar";
 import { ResponsiveLine } from "@nivo/line";
+import { Progress } from "@/components/ui/progress";
 
 export default function Dashboard() {
   return (
@@ -73,18 +73,6 @@ export default function Dashboard() {
                   <div>Nutrient Level</div>
                   <div className="font-semibold">High</div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="col-span-full md:col-span-2 lg:col-span-3">
-            <CardHeader>
-              <CardTitle>Farm Analytics</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid gap-6 md:grid-cols-3">
-                <LineChart className="w-full aspect-[4/3]" />
-                <BarChart className="w-full aspect-[4/3]" />
-                <LineChart className="w-full aspect-[4/3]" />
               </div>
             </CardContent>
           </Card>
@@ -186,59 +174,6 @@ function LineChart(props) {
           },
         }}
         role="application"
-      />
-    </div>
-  );
-}
-
-function BarChart(props) {
-  return (
-    <div {...props}>
-      <ResponsiveBar
-        data={[
-          { name: "Jan", count: 111 },
-          { name: "Feb", count: 157 },
-          { name: "Mar", count: 129 },
-          { name: "Apr", count: 150 },
-          { name: "May", count: 119 },
-          { name: "Jun", count: 72 },
-        ]}
-        keys={["count"]}
-        indexBy="name"
-        margin={{ top: 0, right: 0, bottom: 40, left: 40 }}
-        padding={0.3}
-        colors={["#2563eb"]}
-        axisBottom={{
-          tickSize: 0,
-          tickPadding: 16,
-        }}
-        axisLeft={{
-          tickSize: 0,
-          tickValues: 4,
-          tickPadding: 16,
-        }}
-        gridYValues={4}
-        theme={{
-          tooltip: {
-            chip: {
-              borderRadius: "9999px",
-            },
-            container: {
-              fontSize: "12px",
-              textTransform: "capitalize",
-              borderRadius: "6px",
-            },
-          },
-          grid: {
-            line: {
-              stroke: "#f3f4f6",
-            },
-          },
-        }}
-        tooltipLabel={({ id }) => `${id}`}
-        enableLabel={false}
-        role="application"
-        ariaLabel="A bar chart showing data"
       />
     </div>
   );
