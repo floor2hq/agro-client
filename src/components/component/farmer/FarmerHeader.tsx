@@ -1,5 +1,10 @@
 import { Button } from "@/components/ui/button";
-import { LayoutDashboardIcon, PlusIcon, TractorIcon } from "lucide-react";
+import {
+  LayoutDashboardIcon,
+  PlusIcon,
+  TractorIcon,
+  Wheat,
+} from "lucide-react";
 import Link from "next/link";
 
 export default function FarmerHeader() {
@@ -30,21 +35,21 @@ export default function FarmerHeader() {
           className="flex items-center px-4 py-4 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:rounded-lg dark:text-gray-200"
           href="/farmer/dashboard"
         >
-          <LayoutDashboardIcon className="h-5 w-5" />
+          <LayoutDashboardIcon className="h-5 w-5 text-primary" />
           <span className="mx-4">Dashboard</span>
         </Link>
         <Link
           className="flex items-center px-4 py-4 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 hover:rounded-lg"
           href="/farmer/farms"
         >
-          <TractorIcon className="h-5 w-5" />
+          <TractorIcon className="h-5 w-5 text-primary" />
           <span className="mx-4">Farms</span>
         </Link>
         <Link
           className="flex items-center px-4 py-4 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 hover:rounded-lg"
           href="#"
         >
-          <PlusIcon className="h-5 w-5" />
+          <Wheat className="h-5 w-5 text-primary" />
           <span className="mx-4">Surplus</span>
         </Link>
       </nav>

@@ -1,8 +1,14 @@
 import React from "react";
-import FarmCard from "@/components/component/FarmCard";
+import FarmCard from "@/components/component/farmer/FarmCard";
+import FarmerHeader from "@/components/component/farmer/FarmerHeader";
 
 function FarmsPage() {
-  return <FarmCard />;
+  return (
+    <>
+      <FarmerHeader />
+      <FarmCard />
+    </>
+  );
 }
 
 export default FarmsPage;
