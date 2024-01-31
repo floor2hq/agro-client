@@ -9,6 +9,7 @@ export default function HomePage() {
     <div className="w-full h-screen bg-green-50 flex items-center justify-center">
       <div>
         <Image
+          priority
           alt="Agrotech background"
           className="object-contain rounded-l-xl"
           src="/agrotech.jpeg"
