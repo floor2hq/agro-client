@@ -1,15 +1,10 @@
 import { Button } from "@/components/ui/button";
-import {
-  LayoutDashboardIcon,
-  PlusIcon,
-  TractorIcon,
-  Wheat,
-} from "lucide-react";
+import { LayoutDashboardIcon, TractorIcon, Wheat } from "lucide-react";
 import Link from "next/link";
 
 export default function FarmerHeader() {
   return (
-    <header className="flex items-center justify-between px-6 py-4 bg-white shadow dark:bg-gray-800">
+    <header className="sticky flex items-center justify-between px-6 py-4 bg-white shadow dark:bg-gray-800">
       <div className="flex items-center space-x-4">
         <svg
           className="h-8 w-8 text-green-500"
