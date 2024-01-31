@@ -8,7 +8,7 @@ export default function Dashboard() {
   return (
     <div className="flex flex-col h-screen bg-gray-100 dark:bg-gray-900">
       <FarmerHeader />
-      <main className="flex-1 overflow-y-auto p-6">
+      <main className="flex-1 overflow-y-auto p-4">
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           <Card>
             <CardHeader>
@@ -72,6 +72,40 @@ export default function Dashboard() {
                 <div className="flex items-center justify-between">
                   <div>Nutrient Level</div>
                   <div className="font-semibold">High</div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <CardTitle>Pest Activity</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid gap-4">
+                <div className="flex items-center justify-between">
+                  <div>Current Risk Level</div>
+                  <div className="font-semibold">Low</div>
+                </div>
+                <div className="flex items-center justify-between">
+                  <div>Recommended Action</div>
+                  <div className="font-semibold">Monitor</div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <CardTitle>Equipment Status</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid gap-4">
+                <div className="flex items-center justify-between">
+                  <div>Tractor</div>
+                  <div className="font-semibold">Operational</div>
+                </div>
+                <div className="flex items-center justify-between">
+                  <div>Harvester</div>
+                  <div className="font-semibold">Maintenance Required</div>
                 </div>
               </div>
             </CardContent>

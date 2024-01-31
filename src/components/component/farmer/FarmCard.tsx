@@ -15,7 +15,7 @@ export default function FarmCard({ farmId }: { farmId: string }) {
       <div className="container px-4 max-w-md">
         <Card>
           <CardHeader>
-            <CardTitle>Green Valley Farm</CardTitle>
+            <CardTitle>Farm {farmId}</CardTitle>
           </CardHeader>
           <CardContent>
             <Image

@@ -42,7 +42,7 @@ export default function FarmerHeader() {
         </Link>
         <Link
           className="flex items-center px-4 py-4 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 hover:rounded-lg"
-          href="#"
+          href="/farmer/surplus"
         >
           <Wheat className="h-5 w-5 text-primary" />
           <span className="mx-4">Surplus</span>
