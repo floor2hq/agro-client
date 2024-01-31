@@ -1,60 +1,13 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenuTrigger,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuItem,
-  DropdownMenuContent,
-  DropdownMenu,
-} from "@/components/ui/dropdown-menu";
-import { CardTitle, CardHeader, CardContent, Card } from "@/components/ui/card";
-import { ResponsiveLine } from "@nivo/line";
+import FarmerHeader from "@/components/component/farmer/FarmerHeader";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ResponsiveBar } from "@nivo/bar";
-import Image from "next/image";
+import { ResponsiveLine } from "@nivo/line";
 
 export default function Dashboard() {
   return (
     <div className="flex flex-col h-screen bg-gray-100 dark:bg-gray-900">
-      <header className="flex items-center justify-between px-6 py-4 bg-white shadow dark:bg-gray-800">
-        <div className="flex items-center space-x-4">
-          <LeafIcon className="h-8 w-8 text-green-500" />
-          <h1 className="text-2xl font-semibold text-gray-700 dark:text-gray-200">
-            AgroTech Dashboard
-          </h1>
-        </div>
-        <div className="flex items-center space-x-4">
-          <Button className="hidden md:flex" variant="outline">
-            Log Out
-          </Button>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button className="rounded-full" size="icon" variant="ghost">
-                <Image
-                  alt="Avatar"
-                  className="rounded-full"
-                  height="32"
-                  src="/placeholder.svg"
-                  style={{
-                    aspectRatio: "32/32",
-                    objectFit: "cover",
-                  }}
-                  width="32"
-                />
-                <span className="sr-only">Toggle user menu</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Settings</DropdownMenuItem>
-              <DropdownMenuItem>Support</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-      </header>
+      <FarmerHeader />
       <main className="flex-1 overflow-y-auto p-6">
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           <Card>
@@ -138,26 +91,6 @@ export default function Dashboard() {
         </div>
       </main>
     </div>
-  );
-}
-
-function LeafIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
-      <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" />
-    </svg>
   );
 }
 
