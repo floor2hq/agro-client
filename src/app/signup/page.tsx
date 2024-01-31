@@ -67,7 +67,7 @@ export default function SignUp() {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-1 flex flex-col gap-4"
+            className="space-y-1 flex flex-col gap-4 min-w-64"
           >
             <div>
               <FormField
@@ -88,7 +88,7 @@ export default function SignUp() {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Password</FormLabel>
+                    <FormLabel>Create Password</FormLabel>
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
@@ -110,7 +110,7 @@ export default function SignUp() {
                         <SelectContent>
                           <SelectGroup>
                             <SelectItem value="farmer">Farmer</SelectItem>
-                            <SelectItem value="supplier">Supplier</SelectItem>
+                            <SelectItem value="cold_storage_owner">Cold Storage Owner</SelectItem>
                             <SelectItem value="distributor">
                               Distributor
                             </SelectItem>

@@ -1,10 +1,39 @@
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import Link from "next/link";
+"use client";
 import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
+import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+
+const formSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8),
+});
 
 export default function HomePage() {
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    // Do something with the form values.
+    // ✅ This will be type-safe and validated.
+    console.log(values);
+  }
   return (
     <div className="w-full h-screen bg-green-50 flex items-center justify-center">
       <div>
@@ -18,53 +47,50 @@ export default function HomePage() {
         />
       </div>
       <div className="w-[600px] h-[600px] px-8 bg-white rounded-r-xl shadow-md flex flex-col items-center justify-center">
-        <h2 className="text-2xl font-semibold text-center text-gray-700 dark:text-white mb-auto mt-auto">
+        <h2 className="text-2xl font-semibold text-center text-gray-700 dark:text-white mt-24 mb-10">
           AgroTech Login
         </h2>
-        <form className="mt-4 min-w-64 mb-auto">
-          <div className="w-full mb-4">
-            <Label
-              className="text-gray-700 dark:text-gray-200"
-              htmlFor="username"
-            >
-              Username
-            </Label>
-            <Input className="mt-1 w-full" id="username" required type="text" />
-          </div>
-          <div className="w-full mb-4">
-            <div className="flex justify-between items-end">
-              <Label
-                className="text-gray-700 dark:text-gray-200"
-                htmlFor="password"
-              >
-                Password
-              </Label>
-              <Link className="text-sm text-gray-400 hover:underline" href="#">
-                Forgot password?
-              </Link>
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-1 flex flex-col gap-4 min-w-64"
+          >
+            <div>
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <FormControl>
+                      <Input {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             </div>
-            <Input
-              className="mt-1 w-full"
-              id="password"
-              required
-              type="password"
-            />
-          </div>
-          <div className="mt-6">
-            <Button
-              className="w-full py-2 px-4 text-center bg-[#62a3ae] rounded-md text-white text-sm hover:bg-[#4a7b84]"
-              type="submit"
-            >
-              Login
+            <Button type="submit" className="hover:bg-[#4a7b84] bg-[#62a3ae]">
+              Submit
             </Button>
-          </div>
-        </form>
+          </form>
+        </Form>
         <p className="mb-auto mt-4 text-center">
           Don&apos;t have an account?{" "}
-          <Link
-            className="text-[#62a3ae] hover:text-green-600"
-            href="/signup"
-          >
+          <Link className="text-[#62a3ae] hover:text-green-600" href="/signup">
             Sign up
           </Link>
         </p>
