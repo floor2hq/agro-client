@@ -44,6 +44,7 @@ export default function FarmCard({ farmId }: { farmId: string }) {
             <Button size="sm">
               <Link href={`/farmer/farms/${farmId}`}>View Details</Link>
             </Button>
+            
           </CardFooter>
         </Card>
       </div>
