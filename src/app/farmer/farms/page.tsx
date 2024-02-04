@@ -58,7 +58,9 @@ function FarmsPage() {
       })
       .then((res) => {
         setCrop(res.data);
-      });
+        localStorage.setItem("crops", JSON.stringify(res.data));
+      })
+      .catch((err) => console.log(err));
 
     axios
       .get(`${URL}/farm`, {
@@ -70,7 +72,7 @@ function FarmsPage() {
         setAllFarms(res.data);
         localStorage.setItem("farms", JSON.stringify(res.data));
       });
-  }, [URL, token]);
+  }, []);
 
   console.log(allFarms);
   const handleFarmCreate = () => {

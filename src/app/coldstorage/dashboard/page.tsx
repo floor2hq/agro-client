@@ -1,61 +1,23 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenuTrigger,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuItem,
-  DropdownMenuContent,
-  DropdownMenu,
-} from "@/components/ui/dropdown-menu";
-import { CardTitle, CardHeader, CardContent, Card } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ResponsiveLine } from "@nivo/line";
-import { ResponsiveBar } from "@nivo/bar";
-import Image from "next/image";
+// import { Progress } from "@/components/ui/progress";
+import ColdHeader from "@/components/component/coldstorage/ColdHeader";
+import IsAuth from "@/lib/Auth";
+import { redirect } from "next/navigation";
+import { useLayoutEffect } from "react";
 
 export default function Dashboard() {
+  useLayoutEffect(() => {
+    const isAuth = IsAuth();
+    if (!isAuth) {
+      redirect("/");
+    }
+  }, []);
   return (
     <div className="flex flex-col h-screen bg-gray-100 dark:bg-gray-900">
-      <header className="flex items-center justify-between px-6 py-4 bg-white shadow dark:bg-gray-800">
-        <div className="flex items-center space-x-4">
-          <LeafIcon className="h-8 w-8 text-green-500" />
-          <h1 className="text-2xl font-semibold text-gray-700 dark:text-gray-200">
-            AgroTech Dashboard
-          </h1>
-        </div>
-        <div className="flex items-center space-x-4">
-          <Button className="hidden md:flex" variant="outline">
-            Log Out
-          </Button>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button className="rounded-full" size="icon" variant="ghost">
-                <Image
-                  alt="Avatar"
-                  className="rounded-full"
-                  height="32"
-                  src="/placeholder.svg"
-                  style={{
-                    aspectRatio: "32/32",
-                    objectFit: "cover",
-                  }}
-                  width="32"
-                />
-                <span className="sr-only">Toggle user menu</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Settings</DropdownMenuItem>
-              <DropdownMenuItem>Support</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-      </header>
-      <main className="flex-1 overflow-y-auto p-6">
+      <ColdHeader />
+      <main className="flex-1 overflow-y-auto p-4">
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           <Card>
             <CardHeader>
@@ -123,15 +85,37 @@ export default function Dashboard() {
               </div>
             </CardContent>
           </Card>
-          <Card className="col-span-full md:col-span-2 lg:col-span-3">
+          <Card>
             <CardHeader>
-              <CardTitle>Farm Analytics</CardTitle>
+              <CardTitle>Pest Activity</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="grid gap-6 md:grid-cols-3">
-                <LineChart className="w-full aspect-[4/3]" />
-                <BarChart className="w-full aspect-[4/3]" />
-                <LineChart className="w-full aspect-[4/3]" />
+              <div className="grid gap-4">
+                <div className="flex items-center justify-between">
+                  <div>Current Risk Level</div>
+                  <div className="font-semibold">Low</div>
+                </div>
+                <div className="flex items-center justify-between">
+                  <div>Recommended Action</div>
+                  <div className="font-semibold">Monitor</div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <CardTitle>Equipment Status</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid gap-4">
+                <div className="flex items-center justify-between">
+                  <div>Tractor</div>
+                  <div className="font-semibold">Operational</div>
+                </div>
+                <div className="flex items-center justify-between">
+                  <div>Harvester</div>
+                  <div className="font-semibold">Maintenance Required</div>
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -141,27 +125,7 @@ export default function Dashboard() {
   );
 }
 
-function LeafIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
-      <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" />
-    </svg>
-  );
-}
-
-function CloudSunIcon(props) {
+function CloudSunIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
@@ -185,7 +149,7 @@ function CloudSunIcon(props) {
   );
 }
 
-function LineChart(props) {
+function LineChart(props: React.HTMLProps<HTMLDivElement>) {
   return (
     <div {...props}>
       <ResponsiveLine
@@ -253,59 +217,6 @@ function LineChart(props) {
           },
         }}
         role="application"
-      />
-    </div>
-  );
-}
-
-function BarChart(props) {
-  return (
-    <div {...props}>
-      <ResponsiveBar
-        data={[
-          { name: "Jan", count: 111 },
-          { name: "Feb", count: 157 },
-          { name: "Mar", count: 129 },
-          { name: "Apr", count: 150 },
-          { name: "May", count: 119 },
-          { name: "Jun", count: 72 },
-        ]}
-        keys={["count"]}
-        indexBy="name"
-        margin={{ top: 0, right: 0, bottom: 40, left: 40 }}
-        padding={0.3}
-        colors={["#2563eb"]}
-        axisBottom={{
-          tickSize: 0,
-          tickPadding: 16,
-        }}
-        axisLeft={{
-          tickSize: 0,
-          tickValues: 4,
-          tickPadding: 16,
-        }}
-        gridYValues={4}
-        theme={{
-          tooltip: {
-            chip: {
-              borderRadius: "9999px",
-            },
-            container: {
-              fontSize: "12px",
-              textTransform: "capitalize",
-              borderRadius: "6px",
-            },
-          },
-          grid: {
-            line: {
-              stroke: "#f3f4f6",
-            },
-          },
-        }}
-        tooltipLabel={({ id }) => `${id}`}
-        enableLabel={false}
-        role="application"
-        ariaLabel="A bar chart showing data"
       />
     </div>
   );
