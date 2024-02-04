@@ -26,27 +26,40 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import Image from "next/image";
+import axios from "axios";
 
 const formSchema = z.object({
-  email: z.string().email(),
+  name: z.string().min(3),
+  mail: z.string().email(),
   password: z.string(),
   role: z.string(),
+  phone: z.string().min(10).max(10),
 });
 
 export default function SignUp() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: "",
+      name: "",
+      mail: "",
       password: "",
       role: "",
+      phone:""
     },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values);
+    const URL = process.env.NEXT_PUBLIC_API_URL;
+    console.log("values::",values)
+    axios
+      .post(`${URL}/registration`, values ,{
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+        },
+      })
+      .then((res) => console.log(res));
   }
   return (
     <div className="w-full h-screen bg-green-50 flex items-center justify-center">
@@ -72,10 +85,36 @@ export default function SignUp() {
             <div>
               <FormField
                 control={form.control}
-                name="email"
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Name</FormLabel>
+                    <FormControl>
+                      <Input {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="mail"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="phone"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Phone</FormLabel>
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
@@ -109,9 +148,11 @@ export default function SignUp() {
                         </SelectTrigger>
                         <SelectContent>
                           <SelectGroup>
-                            <SelectItem value="farmer">Farmer</SelectItem>
-                            <SelectItem value="cold_storage_owner">Cold Storage Owner</SelectItem>
-                            <SelectItem value="distributor">
+                            <SelectItem value="FARMER">Farmer</SelectItem>
+                            <SelectItem value="STORAGE_OWNER">
+                              Cold Storage Owner
+                            </SelectItem>
+                            <SelectItem value="DISTRIBUTOR">
                               Distributor
                             </SelectItem>
                           </SelectGroup>

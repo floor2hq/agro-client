@@ -2,9 +2,18 @@
 import FarmerHeader from "@/components/component/farmer/FarmerHeader";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ResponsiveLine } from "@nivo/line";
-import { Progress } from "@/components/ui/progress";
+// import { Progress } from "@/components/ui/progress";
+import IsAuth from "@/lib/Auth";
+import { useLayoutEffect } from "react";
+import { redirect } from "next/navigation";
 
 export default function Dashboard() {
+  useLayoutEffect(() => {
+    const isAuth = IsAuth();
+    if (!isAuth) {
+      redirect("/");
+    }
+  }, []);
   return (
     <div className="flex flex-col h-screen bg-gray-100 dark:bg-gray-900">
       <FarmerHeader />
@@ -116,7 +125,7 @@ export default function Dashboard() {
   );
 }
 
-function CloudSunIcon(props) {
+function CloudSunIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
@@ -140,7 +149,7 @@ function CloudSunIcon(props) {
   );
 }
 
-function LineChart(props) {
+function LineChart(props: React.HTMLProps<HTMLDivElement>) {
   return (
     <div {...props}>
       <ResponsiveLine

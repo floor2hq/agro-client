@@ -1,3 +1,4 @@
+"use client";
 import FarmAnalytics from "@/components/component/farmer/FarmAnalytics";
 import FarmerHeader from "@/components/component/farmer/FarmerHeader";
 import Image from "next/image";
@@ -6,10 +7,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 
 type params = {
-  farmId: string;
+  farmNo: string;
 };
 
 export default function FarmDetails({ params }: { params: params }) {
+  const farms = JSON.parse(localStorage.getItem("farms") || "[]");
   return (
     <>
       <FarmerHeader />
@@ -24,7 +26,9 @@ export default function FarmDetails({ params }: { params: params }) {
           />
         </div>
         <div className="flex flex-col gap-4 w-[50%]">
-          <div className="text-3xl font-bold pt-4">Farm {params.farmId}</div>
+          <div className="text-3xl font-bold pt-4">
+            Farm {params.farmNo + 1}
+          </div>
           <Card>
             <CardHeader>
               <CardTitle className="text-3xl">
@@ -67,7 +71,9 @@ export default function FarmDetails({ params }: { params: params }) {
             <CardContent>
               <div className="grid gap-4">
                 <div className="flex items-center justify-between text-lg">
-                  <div className="font-medium">Wheat</div>
+                  <div className="font-medium capitalize">
+                    {farms[params.farmNo].crops[0].name}
+                  </div>
                   <div className="font-semibold">₹80/kg</div>
                 </div>
               </div>
@@ -83,7 +89,9 @@ export default function FarmDetails({ params }: { params: params }) {
             <CardContent>
               <div className="grid gap-4">
                 <div className="flex items-center justify-between text-lg">
-                  <div className="font-medium">Wheat</div>
+                  <div className="font-medium capitalize">
+                    {farms[params.farmNo].crops[0].name}
+                  </div>
                   <div className="font-semibold">March 2024</div>
                 </div>
               </div>
