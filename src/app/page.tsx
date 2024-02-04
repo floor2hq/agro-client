@@ -38,7 +38,7 @@ export default function HomePage() {
     axios
       .post(`${URL}/login`, values, {
         headers: {
-          "Content-Type": "application/json; charset=utf-8",
+          "Content-Type": "application/json",
         },
       })
       .then((res) => sessionStorage.setItem("token", res.data.token))
