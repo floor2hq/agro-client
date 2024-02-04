@@ -1,8 +1,16 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { LayoutDashboardIcon, TractorIcon, Wheat } from "lucide-react";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function FarmerHeader() {
+  const currentPath = usePathname();
+  const router = useRouter();
+  const handleLogout = () => {
+    sessionStorage.removeItem("token");
+    router.push("/");
+  };
   return (
     <header className="sticky flex items-center justify-between px-6 py-4 bg-white shadow dark:bg-gray-800">
       <div className="flex items-center space-x-4">
@@ -27,21 +35,33 @@ export default function FarmerHeader() {
       </div>
       <nav className="flex-1 flex gap-3 justify-center space-x-4">
         <Link
-          className="flex items-center px-4 py-4 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:rounded-lg dark:text-gray-200"
+          className={
+            currentPath === "/farmer/dashboard"
+              ? "flex items-center px-4 py-4 text-sm font-medium text-gray-700 bg-gray-200 rounded-lg dark:text-gray-200"
+              : "flex items-center px-4 py-4 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:rounded-lg dark:text-gray-200"
+          }
           href="/farmer/dashboard"
         >
           <LayoutDashboardIcon className="h-5 w-5 text-primary" />
           <span className="mx-4">Dashboard</span>
         </Link>
         <Link
-          className="flex items-center px-4 py-4 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 hover:rounded-lg"
+          className={
+            currentPath === "/farmer/farms"
+              ? "flex items-center px-4 py-4 text-sm font-medium text-gray-700 bg-gray-200 rounded-lg dark:text-gray-200"
+              : "flex items-center px-4 py-4 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:rounded-lg dark:text-gray-200"
+          }
           href="/farmer/farms"
         >
           <TractorIcon className="h-5 w-5 text-primary" />
           <span className="mx-4">Farms</span>
         </Link>
         <Link
-          className="flex items-center px-4 py-4 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-100 hover:rounded-lg"
+          className={
+            currentPath === "/farmer/surplus"
+              ? "flex items-center px-4 py-4 text-sm font-medium text-gray-700 bg-gray-200 rounded-lg dark:text-gray-200"
+              : "flex items-center px-4 py-4 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:rounded-lg dark:text-gray-200"
+          }
           href="/farmer/surplus"
         >
           <Wheat className="h-5 w-5 text-primary" />
@@ -49,7 +69,11 @@ export default function FarmerHeader() {
         </Link>
       </nav>
       <div className="flex items-center space-x-4">
-        <Button className="hidden md:flex bg-red-600" variant="destructive">
+        <Button
+          onClick={handleLogout}
+          className="hidden md:flex bg-red-600"
+          variant="destructive"
+        >
           Log Out
         </Button>
       </div>
