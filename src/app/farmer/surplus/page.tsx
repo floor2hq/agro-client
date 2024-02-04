@@ -25,6 +25,7 @@ import {
 } from "@/components/ui/select";
 import axios from "axios";
 import { Crop } from "@/app/farmer/farms/page";
+import { Farm } from "@/app/farmer/farms/page";
 
 export default function Surplus() {
   const URL = process.env.NEXT_PUBLIC_API_URL;
@@ -34,7 +35,7 @@ export default function Surplus() {
   const farmsList = JSON.parse(localStorage.getItem("farms"));
   const [surplusData, setSurplusData] = React.useState([]);
   const [newSurplus, setNewSurplus] = React.useState({});
-``
+  ``;
   useEffect(() => {
     axios
       .get(`${URL}/harvest`, {
@@ -124,7 +125,7 @@ export default function Surplus() {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup className="capitalize">
-                      {farmsList.map((farm) => (
+                      {farmsList.map((farm: Farm) => (
                         <SelectItem key={farm._id} value={farm._id}>
                           {farm.location}
                         </SelectItem>
@@ -159,7 +160,7 @@ export default function Surplus() {
       </div>
       <div className="w-full flex gap-4 flex-wrap">
         {surplusData.map((surplus) => (
-          <CropCard key={surplus._id} />
+          <CropCard key={surplus} />
         ))}
       </div>
     </>

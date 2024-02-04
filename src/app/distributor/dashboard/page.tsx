@@ -141,7 +141,7 @@ export default function Dashboard() {
   );
 }
 
-function LeafIcon(props) {
+function LeafIcon(props: React.ComponentProps<"svg">) {
   return (
     <svg
       {...props}
@@ -161,7 +161,7 @@ function LeafIcon(props) {
   );
 }
 
-function CloudSunIcon(props) {
+function CloudSunIcon(props: React.ComponentProps<"svg">) {
   return (
     <svg
       {...props}
@@ -185,7 +185,7 @@ function CloudSunIcon(props) {
   );
 }
 
-function LineChart(props) {
+function LineChart(props: React.ComponentProps<"div">) {
   return (
     <div {...props}>
       <ResponsiveLine
@@ -258,7 +258,7 @@ function LineChart(props) {
   );
 }
 
-function BarChart(props) {
+function BarChart(props: React.ComponentProps<"div">) {
   return (
     <div {...props}>
       <ResponsiveBar

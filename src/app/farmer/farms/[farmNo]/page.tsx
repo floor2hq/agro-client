@@ -27,7 +27,7 @@ export default function FarmDetails({ params }: { params: params }) {
         </div>
         <div className="flex flex-col gap-4 w-[50%]">
           <div className="text-3xl font-bold pt-4">
-            Farm {params.farmNo + 1}
+            Farm {parseInt(params.farmNo) + 1}
           </div>
           <Card>
             <CardHeader>

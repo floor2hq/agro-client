@@ -72,7 +72,7 @@ function FarmsPage() {
         setAllFarms(res.data);
         localStorage.setItem("farms", JSON.stringify(res.data));
       });
-  }, []);
+  }, [URL, token]);
 
   console.log(allFarms);
   const handleFarmCreate = () => {
