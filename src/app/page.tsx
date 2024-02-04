@@ -10,30 +10,42 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8),
+  mail: z.string().email(),
+  password: z.string().min(3),
 });
 
 export default function HomePage() {
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: "",
+      mail: "",
       password: "",
     },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+    const URL = process.env.NEXT_PUBLIC_API_URL;
+    console.log("values::", values);
+    axios
+      .post(`${URL}/login`, values, {
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+        },
+      })
+      .then((res) => sessionStorage.setItem("token", res.data.token))
+      .then(() => router.push("/farmer/dashboard"))
+      .catch((err) => console.log(err));
   }
+
   return (
     <div className="w-full h-screen bg-green-50 flex items-center justify-center">
       <div>
@@ -58,7 +70,7 @@ export default function HomePage() {
             <div>
               <FormField
                 control={form.control}
-                name="email"
+                name="mail"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Email</FormLabel>
@@ -76,7 +88,7 @@ export default function HomePage() {
                   <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
-                      <Input {...field} />
+                      <Input {...field} type="password" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
