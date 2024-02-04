@@ -2,16 +2,22 @@
 import FarmAnalytics from "@/components/component/farmer/FarmAnalytics";
 import FarmerHeader from "@/components/component/farmer/FarmerHeader";
 import Image from "next/image";
-import React from "react";
+import React, { use } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import { useEffect } from "react";
+import { set } from "react-hook-form";
 
 type params = {
   farmNo: string;
 };
 
 export default function FarmDetails({ params }: { params: params }) {
-  const farms = JSON.parse(localStorage.getItem("farms") || "[]");
+  const [farms, setFarms] = React.useState([]);
+  useEffect(() => {
+    //@ts-ignore
+    setFarms(JSON.parse(localStorage.getItem("farms")));
+  }, []);
   return (
     <>
       <FarmerHeader />
@@ -72,7 +78,10 @@ export default function FarmDetails({ params }: { params: params }) {
               <div className="grid gap-4">
                 <div className="flex items-center justify-between text-lg">
                   <div className="font-medium capitalize">
-                    {farms[params.farmNo].crops[0].name}
+                    {
+                      //@ts-ignore
+                      farms[params.farmNo].crops[0].name
+                    }
                   </div>
                   <div className="font-semibold">₹80/kg</div>
                 </div>
@@ -90,7 +99,10 @@ export default function FarmDetails({ params }: { params: params }) {
               <div className="grid gap-4">
                 <div className="flex items-center justify-between text-lg">
                   <div className="font-medium capitalize">
-                    {farms[params.farmNo].crops[0].name}
+                    {
+                      //@ts-ignore
+                      farms[params.farmNo].crops[0].name
+                    }
                   </div>
                   <div className="font-semibold">March 2024</div>
                 </div>

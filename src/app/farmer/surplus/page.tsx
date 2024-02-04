@@ -29,14 +29,16 @@ import { Farm } from "@/app/farmer/farms/page";
 
 export default function Surplus() {
   const URL = process.env.NEXT_PUBLIC_API_URL;
-  //@ts-ignore
-  const cropsList: Crop[] = JSON.parse(localStorage.getItem("crops"));
-  //@ts-ignore
-  const farmsList = JSON.parse(localStorage.getItem("farms"));
+  const [cropsList, setCropsList] = React.useState<Crop[]>([]);
+  const [farmsList, setFarmsList] = React.useState<Farm[]>([]);
   const [surplusData, setSurplusData] = React.useState([]);
   const [newSurplus, setNewSurplus] = React.useState({});
   ``;
   useEffect(() => {
+    //@ts-ignore
+    setCropsList(JSON.parse(localStorage.getItem("crops")));
+    //@ts-ignore
+    setFarmsList(JSON.parse(localStorage.getItem("farms")));
     axios
       .get(`${URL}/harvest`, {
         headers: {
