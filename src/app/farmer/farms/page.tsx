@@ -40,7 +40,7 @@ export interface Farm {
 
 function FarmsPage() {
   const URL = process.env.NEXT_PUBLIC_API_URL;
-  const token = sessionStorage.getItem("token");
+  const [token, setToken] = React.useState("");
   const [crop, setCrop] = React.useState<Crop[]>([]);
   const [farms, setFarms] = React.useState({
     location: "",
@@ -50,6 +50,8 @@ function FarmsPage() {
   const [allFarms, setAllFarms] = React.useState<Farm[]>([]);
 
   useEffect(() => {
+    //@ts-ignore
+    setToken(sessionStorage.getItem("token"));
     axios
       .get(`${URL}/crop`, {
         headers: {
